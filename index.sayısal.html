@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayısal Loto Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sayısal Loto Oyunu</h1>
+    <p>Lütfen 6 tahmin giriniz:</p>
+    <input type="number" id="number1" min="1" max="49">
+    <input type="number" id="number2" min="1" max="49">
+    <input type="number" id="number3" min="1" max="49">
+    <input type="number" id="number4" min="1" max="49">
+    <input type="number" id="number5" min="1" max="49">
+    <input type="number" id="number6" min="1" max="49">
+    <button id="kuraButton" onclick="kuraCek()" >Tahmin Gir</button>
+    <br><br>
+   
+   
+    <button onclick="playLotto()">Loto Sonuçlarını Gör</button>
+    <div id="results"></div>
+
+
+    <script>
+       
+        function playLotto() {
+            var selectedNumbers = [];
+            selectedNumbers.push(document.getElementById("number1").value);
+            selectedNumbers.push(document.getElementById("number2").value);
+            selectedNumbers.push(document.getElementById("number3").value);
+            selectedNumbers.push(document.getElementById("number4").value);
+            selectedNumbers.push(document.getElementById("number5").value);
+            selectedNumbers.push(document.getElementById("number6").value);
+           
+           
+            if (new Set(selectedNumbers).size !== selectedNumbers.length) {
+                alert("Lütfen farklı sayılar girin.");
+                return;
+            }
+           
+         
+            for (var i = 0; i < selectedNumbers.length; i++) {
+                if (selectedNumbers[i] < 1 || selectedNumbers[i] > 49) {
+                    alert("Lütfen 1 ile 49 arasında sayılar girin.");
+                    return;
+                }
+            }
+           
+            selectedNumbers.sort(function(a, b){return a-b});
+            displayResults(selectedNumbers);
+        }
+
+
+        function displayResults(numbers) {
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<h2>Loto Sonuçları</h2>";
+            numbers.forEach(function(number, index) {
+                resultsDiv.innerHTML += "<p>" + (index + 1) + ". sayı: " + number + "</p>";
+            });
+        }
+    </script>
+</body>
+</html>

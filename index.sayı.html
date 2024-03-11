@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1'den 99'a Sayılar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #numbersContainer {
+            margin-top: 20px;
+        }
+        .number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 5px;
+            border: 1px solid black;
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>1'den 99'a Sayılar</h1>
+    <button id="sortButton" onclick="sortNumbers()">Sırala</button>
+    <button id="randomButton" onclick="selectRandomNumber()" disabled>Rastgele Sayı Seç</button>
+    <div id="numbersContainer"></div>
+
+
+    <script>
+        var numbers = [];
+
+
+     
+        for (var i = 1; i <= 99; i++) {
+            document.getElementById("numbersContainer").innerHTML += "<span class='number'>" + i + "</span>";
+        }
+
+
+        function sortNumbers() {
+            numbers = [];
+            for (var i = 1; i <= 99; i++) {
+                numbers.push(i);
+            }
+            numbers.sort(function(a, b){return a - b});
+
+
+            var numbersContainer = document.getElementById("numbersContainer");
+            numbersContainer.innerHTML = "";
+            for (var i = 0; i < numbers.length; i++) {
+                if (i % 10 === 0 && i !== 0) {
+                    numbersContainer.innerHTML += "<br>";
+                }
+                numbersContainer.innerHTML += "<span class='number'>" + numbers[i] + "</span>";
+            }
+
+
+            document.getElementById("sortButton").disabled = true;
+            document.getElementById("randomButton").disabled = false;
+        }
+
+
+        function selectRandomNumber() {
+            var randomIndex = Math.floor(Math.random() * numbers.length);
+            var randomSpan = document.getElementsByClassName("number")[randomIndex];
+            randomSpan.classList.add("highlight");
+        }
+    </script>
+</body>
+</html>
+
